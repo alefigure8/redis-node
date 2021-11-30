@@ -1,0 +1,30 @@
+{
+  "name": "redis-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@s-ui/lint": "^3.41.0",
+    "axios": "^0.24.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15",
+    "redis": "^4.0.0",
+    "response-time": "^2.3.2"
+  },
+   "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
+}

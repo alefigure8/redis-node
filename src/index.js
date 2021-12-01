@@ -20,20 +20,22 @@ app.use(express.json())
 app.use(responseTime())
 
 app.get('/character', async (req, res) => {
-    client.get('characters')
-    .then(response => {
-        return res.json({succes: true, data: JSON.parse(response)})
-    })
-    .catch(err => console.log(err))
+    if (!client.get('characters')){
+        const url = "https://rickandmortyapi.com/api/character"
+        const character = await axios(url)
+        client.set('characters', JSON.stringify(character.data))
+            .then(() => {
+                return res.status(200).json({success: true, data: character.data})
+            })
+            .catch(err => console.log(err))
+    } else {
+        client.get('characters')
+            .then(response => {
+                return res.json({succes: true, data: JSON.parse(response)})
+            })
+            .catch(err => console.log(err))
 
-    const url = "https://rickandmortyapi.com/api/character"
-    const character = await axios(url)
-
-    client.set('characters', JSON.stringify(character.data))
-    .then(() => {
-        return res.status(200).json({success: true, data: character.data})
-    })
-    .catch(err => console.log(err))
+    }
 })
 
 app.all('*', (req, res)=> {
